@@ -101,6 +101,23 @@ public class GildedRoseTest {
 		assertEquals(9, broom.getQuality());
 	}
 	@Test
+	public void testUpdateEndOfDay_BothItemSellIn_Change() {
+		// Arrange
+		GildedRose store = new GildedRose();
+		store.addItem(new Item("Aged Brie", 3, 10));
+		store.addItem(new Item("Broom", 4, 10));
+
+		// Act
+		store.updateEndOfDay();
+
+		// Assert
+		List<Item> items = store.getItems();
+		Item itemBrie = items.get(0);
+		Item broom = items.get(1);
+		assertEquals(2, itemBrie.getSellIn());
+		assertEquals(3, broom.getSellIn());
+	}
+	@Test
 	public void testQualityDegradation_After_SellDate_10_7() {
 		// Arrange
 		GildedRose store = new GildedRose();
